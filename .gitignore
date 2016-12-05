@@ -1,2 +1,3 @@
-! *.py
-! *.transcribe
+*.*
+!/*.py
+!/*.transcribe
