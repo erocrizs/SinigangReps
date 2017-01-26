@@ -6,10 +6,14 @@ public class Slide {
 	private ArrayList<BugBox> bugs;
 	private MarkConfig markConfig;
 	
-	public Slide( ArrayList<BugBox> bugs, MarkConfig markConfig ) {
-		this.bugs = bugs;
+	public Slide( MarkConfig markConfig ) {
+		this.bugs = new ArrayList<BugBox>();
 		this.markConfig = markConfig;
 		this.marks = new ArrayList<Vector>();
+	}
+	
+	public void addBug( BugBox bug ) {
+		this.bugs.add( bug );
 	}
 	
 	public void addMark( Vector newMark ) {
