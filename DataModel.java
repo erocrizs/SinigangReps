@@ -44,4 +44,11 @@ public class DataModel {
 		}
 		return scores;
 	}
+	
+	public void resetModel() {
+		this.currentSlide = 0;
+		for( Slide slide: this.slides ) {
+			slide.reset();
+		}
+	}
 }
