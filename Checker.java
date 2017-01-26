@@ -1,14 +1,26 @@
+import java.util.*;
 import java.io.*;
 
 public class Checker {
 	
 	public static void main(String[] args) throws IOException {
-		if( args.length != 2 ) {
-			System.out.println("Usage: java Checker <input-directory-path> <output-directory-path>");
+		Scanner in = new Scanner(System.in);
+		
+		System.out.print("Config File Path (no spaces): ");
+		String configPath = in.next();
+		
+		MarkConfig markConfig = new MarkConfig( 150, 72 );
+		DataModel model = createDataModel( configPath, markConfig );
+		
+		if( model == null ) {
+			return;
 		}
 		
-		String inputPath = args[0];
-		String outputPath = args[1];
+		System.out.print("Input Directory Path (no spaces): ");
+		String inputPath = in.next();
+		
+		System.out.print("Output Directory Path Path (no spaces): ");
+		String outputPath = in.next();
 		
 		File inputDirectory = new File( inputPath );
 		
@@ -31,6 +43,8 @@ public class Checker {
 				if( success ) {
 					// output
 				}
+				
+				model.resetModel();
 			}
 			
 		} else if( inputDirectory.exists() && !inputDirectory.isDirectory() ) {
@@ -63,6 +77,27 @@ public class Checker {
 		}
 		
 		return true;
+	}
+	
+	public static DataModel createDataModel( String pathName, MarkConfig markConfig ) throws IOException {
+		File configFile = new File( pathName );
+		
+		if( configFile.exists() && configFile.isFile() ) {
+			FileReader fr = new FileReader( configFile );
+			BufferedReader br = new BufferedReader( fr );
+			DataModel model = new DataModel( br, markConfig );
+			if( !model.isExtractionSuccess() ) {
+				System.err.println("Error in " + pathName + ": invalid format!" );
+				return null;
+			}
+			return model;
+		} else if( configFile.exists() && !configFile.isFile() ) {
+			System.err.println("Error: " + pathName + " invalid path!");
+		} else {
+			System.err.println("Error: " + pathName + " does not exist!");
+		}
+		
+		return null;
 	}
 	
 }
