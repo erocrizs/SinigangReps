@@ -38,10 +38,12 @@ public class Checker {
 				
 				FileReader fr = new FileReader( file );
 				BufferedReader br = new BufferedReader( fr );
+				boolean success = processFile( br, fileName, model );
 				
-				boolean success = processFile( br, fileName );
 				if( success ) {
-					// output
+					boolean[][] scores = model.getScores();
+					for(int i=0; i<scores.length; i++)
+						System.out.println( Arrays.toString( scores[i] ) );
 				}
 				
 				model.resetModel();
@@ -54,7 +56,7 @@ public class Checker {
 		}
 	}
 	
-	public static boolean processFile( BufferedReader br, String fileName ) throws IOException {
+	public static boolean processFile( BufferedReader br, String fileName, DataModel model ) throws IOException {
 		String line = br.readLine();
 		String[] tokens = line.split(" ");
 		
@@ -65,13 +67,24 @@ public class Checker {
 			return false;
 		}
 		
-		br.readLine();
-		
 		line = br.readLine();
 		while( line != null ) {
 			tokens = line.split(",");
 			
-			// process further
+			switch( tokens[0] ) {
+				case "Next":
+					model.next();
+					break;
+				case "Previous":
+					model.previous();
+					break;
+				case "Reset":
+					model.reset();
+					break;
+				case "Mark":
+					model.addMark( new Vector( Double.parseDouble( tokens[3] ), Double.parseDouble( tokens[4] ) ) );
+					break;
+			}
 			
 			line = br.readLine();
 		}
