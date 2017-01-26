@@ -18,8 +18,8 @@ public class Checker {
 		
 		System.out.print("Input Directory Path (no spaces): ");
 		String inputPath = in.next();
-		
-		System.out.print("Output Directory Path Path (no spaces): ");
+
+		System.out.print("Output Directory Path (no spaces): ");
 		String outputPath = in.next();
 		
 		File inputDirectory = new File( inputPath );
@@ -38,12 +38,34 @@ public class Checker {
 				
 				FileReader fr = new FileReader( file );
 				BufferedReader br = new BufferedReader( fr );
-				boolean success = processFile( br, fileName, model );
-				
-				if( success ) {
+				String username = processFile( br, fileName, model );
+
+				if( username != null ) {
+					File outputDirectory = new File( outputPath );
+					if( !outputDirectory.exists() || !outputDirectory.isDirectory() ) {
+						outputDirectory.mkdirs();
+					}
+
+					String outputFileName = fileName.substring( 0, fileName.length()-4 ) + ".out.csv";
+					File outputFile = new File( outputPath + File.separator + outputFileName );
+					if( !outputFile.exists() ) {
+						outputFile.createNewFile();
+					}
+
+					FileWriter fw = new FileWriter( outputFile );
+					BufferedWriter bw = new BufferedWriter( fw );
+					bw.append( "Username: " + username + "\n" );
+					bw.append( "slide,foundBug1,foundBug2,...\n" );
+
 					boolean[][] scores = model.getScores();
-					for(int i=0; i<scores.length; i++)
-						System.out.println( Arrays.toString( scores[i] ) );
+					for(int i=0; i<scores.length; i++) {
+						bw.append( i+"" );
+						for(int j=0; j<scores[i].length; j++) {
+							bw.append( "," + scores[i][j] );
+						}
+						bw.append( "\n" );
+					}
+					bw.close();
 				}
 				
 				model.resetModel();
@@ -56,7 +78,7 @@ public class Checker {
 		}
 	}
 	
-	public static boolean processFile( BufferedReader br, String fileName, DataModel model ) throws IOException {
+	public static String processFile( BufferedReader br, String fileName, DataModel model ) throws IOException {
 		String line = br.readLine();
 		String[] tokens = line.split(" ");
 		
@@ -64,7 +86,7 @@ public class Checker {
 		line = br.readLine();
 		if( !"Username:".equals( tokens[0] ) || !"action_type,timestamp,slide,x,y". equals( line ) ) {
 			System.err.println("Error in " + fileName + ": invalid format!" );
-			return false;
+			return null;
 		}
 		
 		line = br.readLine();
@@ -89,7 +111,7 @@ public class Checker {
 			line = br.readLine();
 		}
 		
-		return true;
+		return username;
 	}
 	
 	public static DataModel createDataModel( String pathName, MarkConfig markConfig ) throws IOException {
