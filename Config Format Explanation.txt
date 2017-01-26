@@ -1,0 +1,25 @@
+Format:
+
+--config--
+<s> <n>
+<i> <m> 
+<x1> <y1> <x2> <y2>
+
+
+Format Details:
+
+First line of config (i.e. "--config--") to check validity of file
+'s' is the total number of slides; 'n' is number of slides with bugs
+there are 'n' blocks of input; each starts with 'i', the zero-based-index of that slide, and 'm', the number of bugs in that slide
+body of each block contains four real numbers, with (x1, y1) as the position of the top-left corner of the bounding box of the bug, while (x2, y2) as the position of the bottom-right corner
+
+
+Sample:
+
+--config--
+4 2
+1 2
+100 150 200 225
+335 335 425 360
+3 1
+415 625 525 650
