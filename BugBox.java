@@ -17,11 +17,11 @@ public class BugBox {
 		this.height = Math.abs( botRight.getY() - topLeft.getY() );
 	}
 	
-	public Vector getWidth() {
+	public double getWidth() {
 		return this.width;
 	}
 	
-	public Vector getHeight() {
+	public double getHeight() {
 		return this.height;
 	}
 	

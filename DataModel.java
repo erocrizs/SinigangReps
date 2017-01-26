@@ -38,7 +38,7 @@ public class DataModel {
 	}
 	
 	public boolean[][] getScores() {
-		boolean[][] scores = new scores[ this.slideCount ][ 0 ];
+		boolean[][] scores = new boolean[ this.slideCount ][ 0 ];
 		for( int i=0; i < this.slideCount; i++ ) {
 			scores[i] = this.slides[i].getScore();
 		}

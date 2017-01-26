@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Slide {
 	
 	private ArrayList<Vector> marks;
@@ -21,7 +23,7 @@ public class Slide {
 	public boolean[] getScore() {
 		
 		boolean[] score = new boolean[ this.bugs.size() ];
-		for( int i=0; i<n; i++ ) {
+		for( int i=0; i<this.bugs.size(); i++ ) {
 			for( Vector mark: this.marks ) {
 				if( markConfig.isEncircled( bugs.get( i ), mark ) ) {
 					score[i] = true;
