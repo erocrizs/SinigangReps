@@ -6,6 +6,7 @@ public class DataModel {
 	private MarkConfig markConfig;
 	private int currentSlide;
 	private int slideCount;
+	private boolean success;
 	
 	public DataModel( File details, MarkConfig markConfig ) throws IOException {
 		this.markConfig = markConfig;
@@ -50,5 +51,9 @@ public class DataModel {
 		for( Slide slide: this.slides ) {
 			slide.reset();
 		}
+	}
+	
+	public boolean isExtractionSuccess() {
+		return this.success;
 	}
 }
