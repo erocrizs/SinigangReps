@@ -45,4 +45,7 @@ public class BugBox {
 		return new Vector[] { this.topLeft, this.topRight, this.botLeft, this.botRight };
 	}
 	
+	public String toString() {
+		return "{ " + topLeft.toString() + ", " + botRight + " }";
+	}
 }

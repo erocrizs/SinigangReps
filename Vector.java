@@ -30,4 +30,8 @@ public class Vector {
 	public double magnitude() {
 		return Math.sqrt( ( this.x * this.x ) + ( this.y * this.y ) );
 	}
+	
+	public String toString() {
+		return "< " + x + ", " + y + " >"; 
+	}
 }
