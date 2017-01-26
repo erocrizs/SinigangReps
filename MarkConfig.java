@@ -25,10 +25,10 @@ public class MarkConfig {
 	private boolean collide( Vector ellipseCenter, Vector point ) {
 		Vector difference = point.minus( ellipseCenter );
 		
-		double firstTermNumerator = difference.getX();
+		double firstTermNumerator = difference.getX() * difference.getX();
 		double firstTermDenominator = a * a;
 		
-		double secondTermNumerator = difference.getY();
+		double secondTermNumerator = difference.getY() * difference.getY();
 		double secondTermDenominator = b * b;
 		
 		double firstTerm = firstTermNumerator / firstTermDenominator;
