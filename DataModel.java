@@ -63,11 +63,13 @@ public class DataModel {
 	}
 
 	public void next() {
-		this.currentSlide++;
+		if( this.currentSlide+1 < this.slideCount )
+			this.currentSlide++;
 	}
 	
 	public void previous() {
-		this.currentSlide--;
+		if( this.currentSlide-1 >=0 )
+			this.currentSlide--;
 	}
 	
 	public void reset() {
