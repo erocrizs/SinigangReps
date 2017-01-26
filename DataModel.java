@@ -1,3 +1,9 @@
+/**
+* DataModel
+*
+* DataModel represents the unified body of data being kept track of this program 
+* Contains all the slides, the current slide being processed, and even the configuration of the marks
+*/
 import java.io.*;
 
 public class DataModel {
@@ -8,6 +14,14 @@ public class DataModel {
 	private int slideCount;
 	private boolean success;
 	
+	/**
+	* Constructor; requires a buffered reader that reads the specified config file, and the marking configuration
+	*
+	* @param details	buffered reader that reads the config file containing the details of the slideset
+	* @param markConfig configuration of the marks
+	*
+	* @throws			IOException
+	*/
 	public DataModel( BufferedReader details, MarkConfig markConfig ) throws IOException {
 		this.markConfig = markConfig;
 		this.success = false;
@@ -15,6 +29,11 @@ public class DataModel {
 		this.currentSlide = 0;
 	}
 	
+	/**
+	* Reads the information from the buffered reader that was inputted on the constructor
+	* 
+	* @throws IOException
+	*/
 	private void extractDetail( BufferedReader br ) throws IOException {
 		String line = br.readLine();
 		if( "--config--".equals( line ) ) {
@@ -80,6 +99,12 @@ public class DataModel {
 		this.slides[ currentSlide ].addMark( mark );
 	}
 	
+	/**
+	* Gets the scores (i.e. which bugs have been marked) of each slide
+	* Returns a jagged 2D array
+	* 
+	* @return 	boolean[][]
+	*/
 	public boolean[][] getScores() {
 		boolean[][] scores = new boolean[ this.slideCount ][ 0 ];
 		for( int i=0; i < this.slideCount; i++ ) {
@@ -88,6 +113,9 @@ public class DataModel {
 		return scores;
 	}
 	
+	/**
+	* Reset the entire model to allow it to be reused
+	*/
 	public void resetModel() {
 		this.currentSlide = 0;
 		for( Slide slide: this.slides ) {
@@ -95,6 +123,11 @@ public class DataModel {
 		}
 	}
 	
+	/**
+	* Returns true if the details have been successfully extracted from the config file
+	*
+	* @return 	boolean
+	*/
 	public boolean isExtractionSuccess() {
 		return this.success;
 	}

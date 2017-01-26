@@ -1,3 +1,9 @@
+/**
+* BugBox
+* 
+* BugBox represents the bounding rectangle of a bug in the slides.
+* Stores the four corners of the bounding box.
+*/
 public class BugBox {
 	
 	private Vector topLeft;
@@ -7,6 +13,13 @@ public class BugBox {
 	private double width;
 	private double height;
 	
+	/**
+	* Constructor; requires two vectors representing the top-left and bottom-right corner
+	* Note: this is made with the knowledge that the y position increases from top downwards
+	* 
+	* @param topLeft 	the top-left corner
+	* @param botRight 	the bottom-right corner
+	*/
 	public BugBox( Vector topLeft, Vector botRight ) {
 		this.topLeft = topLeft;
 		this.botRight = botRight;
@@ -41,6 +54,11 @@ public class BugBox {
 		return this.botRight;
 	}
 	
+	/**
+	* Returns an array of vectors containing the four corners of the bounding box
+	* 
+	* @return 	Vector[]
+	*/
 	public Vector[] getCorners() {
 		return new Vector[] { this.topLeft, this.topRight, this.botLeft, this.botRight };
 	}
