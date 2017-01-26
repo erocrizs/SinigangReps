@@ -1,5 +1,6 @@
 *.*
 !/Config Format Explanation.txt
+!/Checker.bat
 !/*.java
 !/**/*.py
 !/**/*.transcribe
