@@ -1,6 +1,7 @@
 *.*
 !/Config Format Explanation.txt
 !/Checker.txt
+!/source/**
 !/*.java
 !/**/*.py
 !/**/*.transcribe
