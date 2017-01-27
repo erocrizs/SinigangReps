@@ -5,10 +5,17 @@ public class ConfigDeriver {
 		Scanner in = new Scanner( System.in );
 		int n = 24;
 	
-		ArrayList<int>[] x1 = new ArrayList<int>[ n ];
-		ArrayList<int>[] y1 = new ArrayList<int>[ n ];
-		ArrayList<int>[] x2 = new ArrayList<int>[ n ];
-		ArrayList<int>[] y2 = new ArrayList<int>[ n ];
+		ArrayList<Integer>[] x1 = new ArrayList[ n ];
+		ArrayList<Integer>[] y1 = new ArrayList[ n ];
+		ArrayList<Integer>[] x2 = new ArrayList[ n ];
+		ArrayList<Integer>[] y2 = new ArrayList[ n ];
+		for(int i=0; i<n; i++) {
+			x1[i] = new ArrayList<Integer>();
+			y1[i] = new ArrayList<Integer>();
+			x2[i] = new ArrayList<Integer>();
+			y2[i] = new ArrayList<Integer>();
+		}
+
 		int bugged = 0;
 		
 		in.nextLine();
