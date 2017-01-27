@@ -1,9 +1,2 @@
-*.*
-!/Config Format Explanation.txt
-!/Checker.txt
-!/Checker.jar
-!/source/**
-!/*.java
-!/**/*.py
-!/**/*.transcribe
-!/configs/**
+input/**
+output/**
