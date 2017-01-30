@@ -1,3 +1,8 @@
+### Version
+This is the **Time-Sensitive Version** of the checker. Instead of just determining if the bug was encircled or not in their final answer, it also tells how much time it has passed between them seeing that specific slide and them marking the bug for the first time.
+
+Note that this program does not recognize a marking as correct if the bug was encircled earlier but is erased later so that it is not part of the final markings.
+
 ### Directory Tree
     root
      + configs
