@@ -8,11 +8,11 @@ import java.io.*;
 
 public class DataModel {
 	
-	private Slide[] slides;
-	private MarkConfig markConfig;
-	private int currentSlide;
-	private int slideCount;
-	private boolean success;
+	protected Slide[] slides;
+	protected MarkConfig markConfig;
+	protected int currentSlide;
+	protected int slideCount;
+	protected boolean success;
 	
 	/**
 	* Constructor; requires a buffered reader that reads the specified config file, and the marking configuration
@@ -34,7 +34,7 @@ public class DataModel {
 	* 
 	* @throws IOException
 	*/
-	private void extractDetail( BufferedReader br ) throws IOException {
+	protected void extractDetail( BufferedReader br ) throws IOException {
 		String line = br.readLine();
 		if( "--config--".equals( line ) ) {
 			line = br.readLine();

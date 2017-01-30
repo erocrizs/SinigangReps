@@ -11,9 +11,9 @@ import java.util.*;
 
 public class Slide {
 	
-	private ArrayList<Vector> marks;
-	private ArrayList<BugBox> bugs;
-	private MarkConfig markConfig;
+	protected ArrayList<Vector> marks;
+	protected ArrayList<BugBox> bugs;
+	protected MarkConfig markConfig;
 	
 	/**
 	* Constructor; requires a MarkConfig to determine type of ellipse
