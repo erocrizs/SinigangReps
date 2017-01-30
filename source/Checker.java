@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.text.*;
 
 public class Checker {
 	
@@ -70,13 +71,16 @@ public class Checker {
 					FileWriter fw = new FileWriter( outputFile );
 					BufferedWriter bw = new BufferedWriter( fw );
 					bw.write( "Username: " + username + "\n" );			// customary first liner
-					bw.append( "slide,foundBug1,foundBug2,...\n" );		// format description of the CSV
+					bw.append( "slide,timeBug1Found,timeBug2Found,...\n" );		// format description of the CSV
 
-					boolean[][] scores = model.getScores();
+					int[][][] scores = ( (TimedDataModel) model ).getTimedScores();
 					for(int i=0; i<scores.length; i++) {
 						bw.append( i+"" );
 						for(int j=0; j<scores[i].length; j++) {
-							bw.append( "," + scores[i][j] );
+							if( scores[i][j][3] != -1 )
+								bw.append( "," + scores[i][j][3] + ":" + scores[i][j][2] + ":" + scores[i][j][1] + ":" + scores[i][j][0] );
+							else
+								bw.append(",------------");
 						}
 						bw.append( "\n" );
 					}
@@ -115,14 +119,22 @@ public class Checker {
 			System.err.println("Error in " + fileName + ": invalid format!" );
 			return null;
 		}
+
+		SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss.SSS" );
 		
 		line = br.readLine();
 		while( line != null ) {
 			tokens = line.split(",");
+
+			Date timestamp = new Date();
+			try {
+				timestamp = formatter.parse( tokens[1] );
+			} catch( Exception e ) {}
+			long milliseconds = timestamp.getTime();
 			
 			switch( tokens[0] ) {
 				case "Next":
-					model.next();
+					( (TimedDataModel) model).next( milliseconds );
 					break;
 				case "Previous":
 					model.previous();
@@ -131,7 +143,7 @@ public class Checker {
 					model.reset();
 					break;
 				case "Mark":
-					model.addMark( new Vector( Double.parseDouble( tokens[3] ), Double.parseDouble( tokens[4] ) ) );
+					( (TimedDataModel) model ).addMark( new Vector( Double.parseDouble( tokens[3] ), Double.parseDouble( tokens[4] ) ), milliseconds );
 					break;
 			}
 			
@@ -158,7 +170,7 @@ public class Checker {
 		if( configFile.exists() && configFile.isFile() ) {
 			FileReader fr = new FileReader( configFile );
 			BufferedReader br = new BufferedReader( fr );
-			DataModel model = new DataModel( br, markConfig );
+			DataModel model = new TimedDataModel( br, markConfig );
 			if( !model.isExtractionSuccess() ) {
 				System.err.println("Error in " + pathName + ": invalid format!" );
 				return null;
