@@ -15,13 +15,16 @@ Note that this program does not recognize a marking as correct if the bug was en
      |  | BugBox.java
      |  | Checker.java
      |  | DataModel.java
+     |  | Mark.java
      |  | MarkConfig.java
      |  | Slide.java
+     |  | TimedDataModel.java
+     |  | TimedSlide.java 
      |  | Vector.java
      |
-     + .gitignore
-     + Checker.jar
-     + Checker.txt
+     | .gitignore
+     | Checker.jar
+     | Checker.txt
 
 ### How to Use
 1. Rename **Checker.txt** to **Checker.bat**. The BAT file was saved as a TXT file to prevent issues when downloading the program
