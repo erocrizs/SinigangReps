@@ -1,3 +1,6 @@
+### Version
+This is the **Basic Version** of the checker. This simply determines if the final set of markings cover the bugs. This means any markings that was done before the final "reset" command for each slide was not used.
+
 ### Directory Tree
     root
      + configs
@@ -14,9 +17,9 @@
      |  | Slide.java
      |  | Vector.java
      |
-     + .gitignore
-     + Checker.jar
-     + Checker.txt
+     | .gitignore
+     | Checker.jar
+     | Checker.txt
 
 ### How to Use
 1. Rename **Checker.txt** to **Checker.bat**. The BAT file was saved as a TXT file to prevent issues when downloading the program
